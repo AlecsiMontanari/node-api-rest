@@ -1,0 +1,22 @@
+{
+  "name": "rest_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlecsiMontanari/node-api-rest.git"
+  },
+  "author": "Alecsi Montanari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlecsiMontanari/node-api-rest/issues"
+  },
+  "homepage": "https://github.com/AlecsiMontanari/node-api-rest#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
