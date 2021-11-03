@@ -1,7 +1,7 @@
 const moment = require('moment');
 const conexao = require('../infra/conexao');
 class Atendimento {
-    adicionar(atendimento, res) {
+    adiciona(atendimento, res) {
         const dataCriacao = new Date();
         const data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss');
         
@@ -39,6 +39,53 @@ class Atendimento {
 
         }
 
+    }
+
+    lista(res){
+        const sql = 'SELECT * FROM Atendimentos';
+        conexao.query(sql, (error, resultados)=>{
+            if(error){
+                res.status(400).json(error);
+            } else {
+                res.status(200).json(resultados);
+            }
+        })
+    }
+    buscaPorId(res, id) {
+        const sql = `SELECT * FROM Atendimentos WHERE id = ${id}`
+        conexao.query(sql, (error, resultado)=>{
+            if(error) {
+                res.status(400).json(error);
+            } else {
+                res.status(200).json(resultado);
+            }
+        })
+    }
+
+    altera(res, id, valores) {
+        if(valores.data){
+            valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss');
+        }
+        
+        const sql = `UPDATE Atendimentos SET ? WHERE id = ${id}`;
+        conexao.query(sql, valores, (error, resultado)=>{
+            if (error) {
+                res.status(400).json(error);
+            } else {
+                res.status(202).json(resultado)
+            }
+        })
+    }
+
+    deleta(res, id) {
+        const sql = `DELETE FROM Atendimentos WHERE id = ${id}`
+        conexao.query(sql, (error, resultado)=>{
+            if(error){
+                res.status(400).json(error);
+            }else{
+                res.status(200).json(resultado);
+            }
+        })
     }
 }
 
